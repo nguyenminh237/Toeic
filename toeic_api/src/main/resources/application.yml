@@ -1,0 +1,79 @@
+spring:
+  application:
+    name: toeic_api
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/toeic_clean?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    enabled: true
+    baseline-on-migrate: ${FLYWAY_BASELINE_ON_MIGRATE:false}
+    baseline-version: 0
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+        default_batch_fetch_size: 50
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 55MB
+  mail:
+    host: ${SMTP_HOST:}
+    port: ${SMTP_PORT:587}
+    username: ${SMTP_USERNAME:}
+    password: ${SMTP_PASSWORD:}
+    properties:
+      mail.smtp.auth: ${SMTP_AUTH:true}
+      mail.smtp.starttls.enable: ${SMTP_STARTTLS:true}
+      mail.smtp.connectiontimeout: 5000
+      mail.smtp.timeout: 5000
+      mail.smtp.writetimeout: 5000
+server:
+  port: ${PORT:8080}
+app:
+  media:
+    storage-path: ${MEDIA_STORAGE_PATH:./.private-media}
+  groq:
+    api-key: ${GROQ_API_KEY:}
+    model: ${GROQ_MODEL:openai/gpt-oss-20b}
+    vocabulary-model: ${GROQ_VOCABULARY_MODEL:openai/gpt-oss-120b}
+    vision-model: ${GROQ_VISION_MODEL:qwen/qwen3.8-27b}
+  admin:
+    enabled: ${ADMIN_BOOTSTRAP_ENABLED:false}
+    username: ${ADMIN_USERNAME:}
+    password: ${ADMIN_PASSWORD:}
+    email: ${ADMIN_EMAIL:}
+    full-name: ${ADMIN_FULL_NAME:System Admin}
+    minimum-password-length: ${ADMIN_MIN_PASSWORD_LENGTH:12}
+  password-reset:
+    enabled: ${PASSWORD_RESET_ENABLED:false}
+    frontend-url: ${FRONTEND_URL:http://localhost:5173}
+    from: ${SMTP_FROM:no-reply@toeic.local}
+cloudinary:
+  cloud-name: ${CLOUDINARY_CLOUD_NAME:}
+  api-key: ${CLOUDINARY_API_KEY:}
+  api-secret: ${CLOUDINARY_API_SECRET:}
+  folder: toeic
+jwt:
+  signer-key: ${JWT_SIGNER_KEY}
+  valid-duration: ${JWT_VALID_HOURS:1}
+  refreshable-duration: ${JWT_REFRESH_HOURS:24}
+logging:
+  level:
+    root: INFO
+---
+# Local credentials stay outside the source tree and never affect the test profile.
+# Supports running from either the repository root or the backend directory.
+spring:
+  config:
+    activate:
+      on-profile: "!test"
+    import:
+      - optional:file:./toeic_api/local.properties
+      - optional:file:./local.properties

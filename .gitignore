@@ -1,0 +1,10 @@
+.maven-cache/
+.work/
+toeic_api/build-test.log
+toeic_api/target/
+local.properties
+toeic_api/local.properties
+toeic_web/node_modules/
+toeic_web/dist/
+.private-media/
+toeic_api/.private-media/

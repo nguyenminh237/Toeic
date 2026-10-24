@@ -1,0 +1,16 @@
+# Copy to local.properties in this directory. That file is ignored by Git.
+# IntelliJ working directory: backend directory or repository root.
+# Environment variables override these values. Test profile ignores this file.
+DB_URL=jdbc:mysql://localhost:3306/toeic_clean?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+DB_USERNAME=root
+DB_PASSWORD=replace-with-your-mysql-password
+# Generate a random signing key of at least 64 bytes; do not reuse this placeholder.
+JWT_SIGNER_KEY=replace-with-a-random-signing-key
+# Existing databases require the explicit migration procedure in BACKEND_ARCHITECTURE.md.
+# Keep FLYWAY_BASELINE_ON_MIGRATE disabled during normal startup.
+
+# Optional AI explanations and vocabulary import (backend only)
+GROQ_API_KEY=
+GROQ_MODEL=openai/gpt-oss-20b
+GROQ_VOCABULARY_MODEL=openai/gpt-oss-120b
+GROQ_VISION_MODEL=qwen/qwen3.8-27b
